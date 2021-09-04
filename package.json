@@ -1,0 +1,30 @@
+{
+  "name": "smartsoft",
+  "version": "1.0.0",
+  "description": "proyecto backend preba",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose",
+    "start": "node ./dist/app.js",
+    "dev": "nodemon ./dist/app.js",
+    "build": "tsc"
+  },
+  "author": "mabravo153",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "pg": "^8.7.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.37"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/parser": "^4.30.0",
+    "standard": "^16.0.3"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
+  }
+}
