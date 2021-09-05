@@ -1,0 +1,1 @@
+{"version":3,"file":"ProductsController.js","sourceRoot":"","sources":["../../controllers/ProductsController.ts"],"names":[],"mappings":";;;;;;;;;;;AAEA,MAAM,kBAAkB;IAChB,KAAK,CAAC,GAAY,EAAE,GAAa;;YACrC,OAAO,GAAG,CAAC,IAAI,CAAC;gBACd,IAAI,EAAE,GAAG;gBACT,GAAG,EAAE,UAAU;aAChB,CAAC,CAAC;QACL,CAAC;KAAA;CACF;AAED,kBAAe,kBAAkB,CAAC"}

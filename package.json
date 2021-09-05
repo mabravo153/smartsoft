@@ -12,6 +12,7 @@
   "author": "mabravo153",
   "license": "ISC",
   "dependencies": {
+    "class-validator": "^0.13.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "pg": "^8.7.1",
@@ -19,6 +20,7 @@
     "typeorm": "^0.2.37"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@typescript-eslint/eslint-plugin": "^4.30.0",
     "@typescript-eslint/parser": "^4.30.0",
