@@ -8,6 +8,10 @@ class ProductRoute implements IRoutes {
 
   getRoutes(): Router {
     this.router.get("/", this.ProductController.index);
+    this.router.get("/:id", this.ProductController.show);
+    this.router.post("/", this.ProductController.index);
+    this.router.put("/:id", this.ProductController.index);
+    this.router.delete("/:id", this.ProductController.index);
 
     return this.router;
   }

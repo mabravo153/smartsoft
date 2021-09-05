@@ -15,7 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const typeorm_1 = require("typeorm");
-const ProductsRoute_1 = __importDefault(require("../routes/ProductsRoute"));
+const ProductRoute_1 = __importDefault(require("../routes/ProductRoute"));
+const error_handler_1 = __importDefault(require("../middlewares/error-handler"));
 class Server {
     constructor() {
         this.routesAPI = {
@@ -27,11 +28,12 @@ class Server {
         this.port = process.env.PORT || "9000";
         this.middlewares();
         this.routes();
-        this.dbConnection();
+        this.errors();
     }
     run() {
         this.app.listen(this.port, () => {
             console.log(`server up since port ${this.port}`);
+            this.dbConnection();
         });
     }
     middlewares() {
@@ -40,8 +42,11 @@ class Server {
     }
     routes() {
         // this.app.use(this.routesAPI.users);
-        this.app.use(this.routesAPI.products, new ProductsRoute_1.default().getRoutes());
+        this.app.use(this.routesAPI.products, new ProductRoute_1.default().getRoutes());
         // this.app.use(this.routesAPI.order);
+    }
+    errors() {
+        this.app.use(error_handler_1.default);
     }
     dbConnection() {
         return __awaiter(this, void 0, void 0, function* () {

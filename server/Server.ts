@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { createConnection } from "typeorm";
 import ProductRoute from "../routes/ProductRoute";
+import errorHandlerMiddleware from "../middlewares/error-handler";
 
 class Server {
   private app: express.Application;
@@ -15,15 +16,15 @@ class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT || "9000";
-
     this.middlewares();
     this.routes();
-    this.dbConnection();
+    this.errors();
   }
 
   run(): void {
     this.app.listen(this.port, () => {
       console.log(`server up since port ${this.port}`);
+      this.dbConnection();
     });
   }
 
@@ -36,6 +37,10 @@ class Server {
     // this.app.use(this.routesAPI.users);
     this.app.use(this.routesAPI.products, new ProductRoute().getRoutes());
     // this.app.use(this.routesAPI.order);
+  }
+
+  errors(): void {
+    this.app.use(errorHandlerMiddleware);
   }
 
   async dbConnection(): Promise<void> {
