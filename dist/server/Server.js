@@ -16,11 +16,12 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const typeorm_1 = require("typeorm");
 const ProductRoute_1 = __importDefault(require("../routes/ProductRoute"));
+const AuthRoute_1 = __importDefault(require("../routes/AuthRoute"));
 const error_handler_1 = __importDefault(require("../middlewares/error-handler"));
 class Server {
     constructor() {
         this.routesAPI = {
-            users: "/api/v1/users",
+            auth: "/api/v1/auth",
             products: "/api/v1/products",
             orders: "/api/v1/orders",
         };
@@ -41,7 +42,7 @@ class Server {
         this.app.use(express_1.default.json());
     }
     routes() {
-        // this.app.use(this.routesAPI.users);
+        this.app.use(this.routesAPI.auth, new AuthRoute_1.default().getRoutes());
         this.app.use(this.routesAPI.products, new ProductRoute_1.default().getRoutes());
         // this.app.use(this.routesAPI.order);
     }

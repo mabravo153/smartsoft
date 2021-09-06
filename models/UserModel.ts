@@ -1,4 +1,10 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import {
+  IsAlphanumeric,
+  IsEmail,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from "class-validator";
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
@@ -19,11 +25,11 @@ class UserModel {
   @Column()
   @IsEmail()
   @IsNotEmpty()
-  email: number;
+  email: string;
 
   @Column()
-  @IsNumber()
   @IsNotEmpty()
+  @IsAlphanumeric()
   password: string;
 
   @Column()

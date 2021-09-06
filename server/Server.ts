@@ -2,13 +2,14 @@ import express from "express";
 import cors from "cors";
 import { createConnection } from "typeorm";
 import ProductRoute from "../routes/ProductRoute";
+import AuthRoute from "../routes/AuthRoute";
 import errorHandlerMiddleware from "../middlewares/error-handler";
 
 class Server {
   private app: express.Application;
   private port: string;
   private routesAPI: { [key: string]: string } = {
-    users: "/api/v1/users",
+    auth: "/api/v1/auth",
     products: "/api/v1/products",
     orders: "/api/v1/orders",
   };
@@ -34,7 +35,7 @@ class Server {
   }
 
   routes(): void {
-    // this.app.use(this.routesAPI.users);
+    this.app.use(this.routesAPI.auth, new AuthRoute().getRoutes());
     this.app.use(this.routesAPI.products, new ProductRoute().getRoutes());
     // this.app.use(this.routesAPI.order);
   }

@@ -24,4 +24,4 @@ class ProductRoute {
     }
 }
 exports.default = ProductRoute;
-//# sourceMappingURL=ProductRoute.js.map
+//# sourceMappingURL=PurchaseRoute.js.map

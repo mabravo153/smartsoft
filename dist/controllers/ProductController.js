@@ -29,23 +29,102 @@ class ProductController {
             if (!products.length) {
                 next(new CustomError_1.default.NotFoundError("Products Not Found", 404));
             }
-            return res.json({
-                code: 200,
-                msg: products,
-            });
+            else {
+                return res.status(200).json({
+                    code: 200,
+                    msg: products,
+                });
+            }
         });
     }
     show(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { id } = req.params;
+                let product = yield typeorm_1.getRepository(ProductModel_1.default).findOne(id);
+                if (!product) {
+                    next(new CustomError_1.default.NotFoundError("Products Not Found", 404));
+                }
+                else {
+                    return res.status(200).json({
+                        code: 200,
+                        msg: product,
+                    });
+                }
+            }
+            catch (error) {
+                next(new CustomError_1.default.CustomApiError("Something went wrong try again later", 500));
+            }
+        });
+    }
+    store(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let { name, category, price, quantity } = req.body;
+            let repository = typeorm_1.getRepository(ProductModel_1.default);
+            let product = new ProductModel_1.default();
+            product.name = name;
+            product.category = category;
+            product.price = price;
+            product.quantity = quantity;
+            try {
+                yield repository.save(product);
+                return res.status(201).json({
+                    code: 201,
+                    msg: product,
+                });
+            }
+            catch (error) {
+                next(new CustomError_1.default.CustomApiError("Something went wrong try again later", 500));
+            }
+        });
+    }
+    update(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let { name, category, price, quantity } = req.body;
             let { id } = req.params;
-            let product = yield typeorm_1.getRepository(ProductModel_1.default).findOne(id);
+            let repository = typeorm_1.getRepository(ProductModel_1.default);
+            let product = yield repository.findOne(id);
             if (!product) {
                 next(new CustomError_1.default.NotFoundError("Products Not Found", 404));
             }
-            return res.json({
-                code: 200,
-                msg: product,
-            });
+            else {
+                product.name = name;
+                product.category = category;
+                product.price = price;
+                product.quantity = quantity;
+                try {
+                    yield repository.save(product);
+                    return res.status(201).json({
+                        code: 201,
+                        msg: product,
+                    });
+                }
+                catch (error) {
+                    next(new CustomError_1.default.CustomApiError("Something went wrong try again later", 500));
+                }
+            }
+        });
+    }
+    destroy(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let { id } = req.params;
+            let repository = typeorm_1.getRepository(ProductModel_1.default);
+            let product = yield repository.findOne(id);
+            if (!product) {
+                next(new CustomError_1.default.NotFoundError("Products Not Found", 404));
+            }
+            else {
+                try {
+                    yield repository.remove(product);
+                    return res.status(204).json({
+                        code: 204,
+                        msg: "Product Deleted",
+                    });
+                }
+                catch (error) {
+                    next(new CustomError_1.default.CustomApiError("Something went wrong try again later", 500));
+                }
+            }
         });
     }
 }
