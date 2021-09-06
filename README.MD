@@ -20,3 +20,9 @@ para la instalacion de este proyecto debemos tener instalado
 - Nodejs
 - Git
 - Docker
+
+TODO
+
+- validar token y hacer middleware de validacion
+- hacer recurso de creacion de ordenes
+- agregar middleware de acceso a los recursos necesarios

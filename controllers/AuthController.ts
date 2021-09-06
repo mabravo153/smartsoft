@@ -56,7 +56,41 @@ class AuthController {
     }
   }
 
-  async login(req: Request, res: Response, next: NextFunction) {}
+  async login(req: Request, res: Response, next: NextFunction) {
+    let { email, password } = req.body;
+
+    let repo = getRepository(UserModel);
+
+    let user = await repo.findOne({
+      where: {
+        email,
+      },
+    });
+
+    if (user) {
+      const isValidPassword = await validatePassword(password, user.password);
+
+      if (isValidPassword) {
+        let token = createToken(user.id);
+
+        return res.status(201).json({
+          code: 201,
+          msg: {
+            userId: user.id,
+            token,
+          },
+        });
+      } else {
+        next(
+          new CustomError.BadRequestError("Password Incorrect, Validate", 400)
+        );
+      }
+    } else {
+      next(
+        new CustomError.NotFoundError("User Not Found, validate email", 404)
+      );
+    }
+  }
 }
 
 export default AuthController;

@@ -1,3 +1,4 @@
+import { Request, Response, NextFunction } from "express";
 import { validate, ValidationError } from "class-validator";
 import { plainToClass } from "class-transformer";
 import { RequestHandler } from "express";
@@ -22,4 +23,22 @@ function validationMiddleware(model: any): RequestHandler {
   };
 }
 
-export default validationMiddleware;
+const validateLoginMiddleware = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  let { email, password } = req.body;
+
+  console.log(req.body);
+
+  if (email && password) {
+    next();
+  } else {
+    next(
+      new CustomError.BadRequestError("email and password is required", 400)
+    );
+  }
+};
+
+export { validationMiddleware, validateLoginMiddleware };

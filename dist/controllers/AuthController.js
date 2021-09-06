@@ -58,7 +58,34 @@ class AuthController {
         });
     }
     login(req, res, next) {
-        return __awaiter(this, void 0, void 0, function* () { });
+        return __awaiter(this, void 0, void 0, function* () {
+            let { email, password } = req.body;
+            let repo = typeorm_1.getRepository(UserModel_1.default);
+            let user = yield repo.findOne({
+                where: {
+                    email,
+                },
+            });
+            if (user) {
+                const isValidPassword = yield encryptpwd_1.validatePassword(password, user.password);
+                if (isValidPassword) {
+                    let token = jwt_1.createToken(user.id);
+                    return res.status(201).json({
+                        code: 201,
+                        msg: {
+                            userId: user.id,
+                            token,
+                        },
+                    });
+                }
+                else {
+                    next(new CustomError_1.default.BadRequestError("Password Incorrect, Validate", 400));
+                }
+            }
+            else {
+                next(new CustomError_1.default.NotFoundError("User Not Found, validate email", 404));
+            }
+        });
     }
 }
 exports.default = AuthController;

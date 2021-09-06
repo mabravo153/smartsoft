@@ -15,8 +15,7 @@ const createToken = (data: string) => {
 
 const validateToken = (token: any) => {
   let secret = process.env.SECRET_KEY || "llavesecreta";
-
-  return token;
+  return jwt.verify(token, secret);
 };
 
-export { createToken };
+export { createToken, validateToken };

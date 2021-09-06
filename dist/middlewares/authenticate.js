@@ -12,14 +12,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validatePassword = exports.encryptPwd = void 0;
-const bcryptjs_1 = __importDefault(require("bcryptjs"));
-const encryptPwd = (password) => __awaiter(void 0, void 0, void 0, function* () {
-    return yield bcryptjs_1.default.hash(password, 12);
+const jwt_1 = require("../utils/jwt");
+const CustomError_1 = __importDefault(require("../errors/CustomError"));
+const authenticateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    let { authorization } = req.headers;
+    console.log(authorization);
+    if (authorization) {
+        try {
+            const validate = jwt_1.validateToken(authorization);
+            next();
+        }
+        catch (error) {
+            next(new CustomError_1.default.UnAuthenticatedError("Authentication invalid", 401));
+        }
+    }
+    else {
+        next(new CustomError_1.default.UnAuthenticatedError("No credentials sent!", 401));
+    }
 });
-exports.encryptPwd = encryptPwd;
-const validatePassword = (password, hash) => __awaiter(void 0, void 0, void 0, function* () {
-    return yield bcryptjs_1.default.compare(password, hash);
-});
-exports.validatePassword = validatePassword;
-//# sourceMappingURL=encryptpwd.js.map
+exports.default = authenticateUser;
+//# sourceMappingURL=authenticate.js.map
