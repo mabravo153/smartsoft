@@ -8,7 +8,7 @@
     "start": "node ./dist/app.js",
     "dev": "nodemon -L ./dist/app.js",
     "build": "tsc",
-    "docker":"docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d"
+    "docker":"docker-compose up -d"
   },
   "author": "mabravo153",
   "license": "ISC",
