@@ -8,9 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const class_validator_1 = require("class-validator");
 const typeorm_1 = require("typeorm");
+const ProductPurcharseModel_1 = __importDefault(require("./ProductPurcharseModel"));
 let UserModel = class UserModel {
 };
 __decorate([
@@ -47,6 +51,10 @@ __decorate([
     class_validator_1.IsNotEmpty(),
     __metadata("design:type", Number)
 ], UserModel.prototype, "money", void 0);
+__decorate([
+    typeorm_1.OneToMany(() => ProductPurcharseModel_1.default, (purchase) => purchase.user),
+    __metadata("design:type", Array)
+], UserModel.prototype, "purchases", void 0);
 UserModel = __decorate([
     typeorm_1.Entity()
 ], UserModel);

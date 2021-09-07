@@ -5,7 +5,8 @@ import {
   IsNumber,
   IsString,
 } from "class-validator";
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import ProductPurchaseModel from "./ProductPurcharseModel";
 
 @Entity()
 class UserModel {
@@ -36,6 +37,9 @@ class UserModel {
   @IsNumber()
   @IsNotEmpty()
   money: number;
+
+  @OneToMany(() => ProductPurchaseModel, (purchase) => purchase.user)
+  purchases: ProductPurchaseModel[];
 }
 
 export default UserModel;

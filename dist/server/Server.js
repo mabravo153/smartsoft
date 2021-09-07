@@ -18,6 +18,7 @@ const typeorm_1 = require("typeorm");
 const ProductRoute_1 = __importDefault(require("../routes/ProductRoute"));
 const AuthRoute_1 = __importDefault(require("../routes/AuthRoute"));
 const error_handler_1 = __importDefault(require("../middlewares/error-handler"));
+const PurchaseRoute_1 = __importDefault(require("../routes/PurchaseRoute"));
 class Server {
     constructor() {
         this.routesAPI = {
@@ -44,7 +45,7 @@ class Server {
     routes() {
         this.app.use(this.routesAPI.auth, new AuthRoute_1.default().getRoutes());
         this.app.use(this.routesAPI.products, new ProductRoute_1.default().getRoutes());
-        // this.app.use(this.routesAPI.order);
+        this.app.use(this.routesAPI.orders, new PurchaseRoute_1.default().getRoutes());
     }
     errors() {
         this.app.use(error_handler_1.default);

@@ -1,33 +1,25 @@
-// import { Router } from "express";
-// import ProductController from "../controllers/ProductController";
-// import ProductModel from "../models/ProductModel";
-// import validation from "../middlewares/validation";
-// import validateUUID from "../middlewares/validateUUID";
-// import IRoutes from "./IRoutes";
+import { Router } from "express";
+import authenticateUser from "../middlewares/authenticate";
+import { validationMiddleware } from "../middlewares/validation";
+import ProductPurcharseModel from "../models/ProductPurcharseModel";
+import IRoutes from "./IRoutes";
+import PurchaseController from "../controllers/PurchaseController";
 
-// class ProductRoute implements IRoutes {
-//   private router = Router();
-//   private ProductController: ProductController = new ProductController();
-//   private validateBody = validation;
+class ProductRoute implements IRoutes {
+  private router = Router();
 
-//   getRoutes(): Router {
-//     this.router.get("/", this.ProductController.index);
-//     this.router.get("/:id", validateUUID, this.ProductController.show);
-//     this.router.post(
-//       "/",
-//       this.validateBody(ProductModel),
-//       this.ProductController.store
-//     );
-//     this.router.put(
-//       "/:id",
-//       validateUUID,
-//       this.validateBody(ProductModel),
-//       this.ProductController.update
-//     );
-//     this.router.delete("/:id", validateUUID, this.ProductController.destroy);
+  private PurchaseController: PurchaseController = new PurchaseController();
 
-//     return this.router;
-//   }
-// }
+  getRoutes(): Router {
+    this.router.post(
+      "/",
+      authenticateUser,
+      validationMiddleware(ProductPurcharseModel),
+      this.PurchaseController.store
+    );
 
-// export default ProductRoute;
+    return this.router;
+  }
+}
+
+export default ProductRoute;

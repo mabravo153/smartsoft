@@ -1,5 +1,21 @@
-import { IsDate, IsDateString, IsNotEmpty, IsString } from "class-validator";
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {
+  IsArray,
+  IsDateString,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  IsUUID,
+} from "class-validator";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  JoinTable,
+  ManyToOne,
+} from "typeorm";
+import UserModel from "./UserModel";
+import ProductModel from "./ProductModel";
 
 @Entity()
 class ProductPurchaseModel {
@@ -12,9 +28,20 @@ class ProductPurchaseModel {
   purchaseDate: Date;
 
   @Column()
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  total: string;
+  total: number;
+
+  @ManyToOne(() => UserModel, (user) => user.purchases)
+  @IsUUID("all")
+  user: UserModel;
+
+  @ManyToMany((type) => ProductModel, (product) => product.purchases, {
+    cascade: true,
+  })
+  @JoinTable()
+  @IsArray()
+  products: ProductModel[];
 }
 
 export default ProductPurchaseModel;

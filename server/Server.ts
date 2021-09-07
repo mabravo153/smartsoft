@@ -4,6 +4,7 @@ import { createConnection } from "typeorm";
 import ProductRoute from "../routes/ProductRoute";
 import AuthRoute from "../routes/AuthRoute";
 import errorHandlerMiddleware from "../middlewares/error-handler";
+import PurchaseRoute from "../routes/PurchaseRoute";
 
 class Server {
   private app: express.Application;
@@ -37,7 +38,7 @@ class Server {
   routes(): void {
     this.app.use(this.routesAPI.auth, new AuthRoute().getRoutes());
     this.app.use(this.routesAPI.products, new ProductRoute().getRoutes());
-    // this.app.use(this.routesAPI.order);
+    this.app.use(this.routesAPI.orders, new PurchaseRoute().getRoutes());
   }
 
   errors(): void {

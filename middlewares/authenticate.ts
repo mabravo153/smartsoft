@@ -9,8 +9,6 @@ const authenticateUser = async (
 ) => {
   let { authorization } = req.headers;
 
-  console.log(authorization);
-
   if (authorization) {
     try {
       const validate = validateToken(authorization);
