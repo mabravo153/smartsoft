@@ -1,6 +1,6 @@
 # Entregable Prueba Técnica Backend Node.js
 
-Prueba desarrollada usando las tecnologias de Typescript, Postgresql, Docker
+Prueba backend desarrollada con nodejs, Typescript, postgresql y typeorm ademas de docker
 
 ## Entrega
 
@@ -11,7 +11,7 @@ Prueba desarrollada usando las tecnologias de Typescript, Postgresql, Docker
 
 ## Extras
 
-- Utilizar una solución con ORM (Object-relational mapping, TypeORM)
+- Utilizacion una solución con ORM (Object-relational mapping, TypeORM)
 
 ### Guia de Instalacion
 
@@ -21,8 +21,6 @@ para la instalacion de este proyecto debemos tener instalado
 - Git
 - Docker
 
-TODO
-
-- validar token y hacer middleware de validacion
-- hacer recurso de creacion de ordenes
-- agregar middleware de acceso a los recursos necesarios
+```
+git clone
+```
