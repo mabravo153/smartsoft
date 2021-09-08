@@ -17,7 +17,7 @@ class Server {
 
   constructor() {
     this.app = express();
-    this.port = process.env.PORT || "9000";
+    this.port = process.env.PORT || "6000";
     this.middlewares();
     this.routes();
     this.errors();

@@ -1,0 +1,13 @@
+{
+   "type": "postgres",
+   "host": "db",
+   "port": 5432,
+   "username": "mabravo153",
+   "password": "barranquilla1.",
+   "database": "smartsoft",
+   "synchronize": true,
+   "logging": false,
+   "entities": [
+      "dist/models/**/*.js"
+   ]
+} 

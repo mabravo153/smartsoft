@@ -10,7 +10,6 @@ services:
       - node-app
   node-app:
     build: .
-    image: mabravo153/smartsoft
     env_file:
       - web-variables.env
     depends_on:

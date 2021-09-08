@@ -9,7 +9,7 @@ Prueba backend desarrollada con nodejs, Typescript, postgresql y typeorm ademas 
 
 - Archivos docker-compose para ejecutar el contenedor de aplicaciones, base de datos postgresql, el servidor nginx ademas de la aplicacion node
 
-- Enlace a la documentacion de los recursos en postman (https://documenter.postman.com/preview/8647074-cc0a1a7f-6655-49d6-a916-39f20a98ffbb?environment=&versionTag=latest&apiName=CURRENT&version=latest&documentationLayout=classic-double-column&right-sidebar=303030&top-bar=FFFFFF&highlight=EF5B25)
+- Enlace a la documentacion de los recursos en postman (https://documenter.getpostman.com/view/8647074/U16gRTMs)
 
 ## Guia de Instalacion
 
@@ -28,10 +28,18 @@ git clone https://github.com/mabravo153/smartsoft.git
 cd smartsoft
 ```
 
-luego de estar dentro de la carpeta del proyecto. debemos ejecutar el siguiente comando
+luego de estar dentro de la carpeta del proyecto. debemos crear un archivo llamado
 
 ```
-npm run docker
+web-variables.env
+```
+
+este archivo sera necesario para la creacion del contenedor docker. en el repositorio hay incluido un archivo de ejemplo. es necesario quitar el .example del final para que este sea funcional
+
+hay que tener en cuenta que las variables de la base de datos deben ser similares a las que el contenedor de base de datos tiene en el archivo docker-compose.yml. ademas el puerto debe ser el indicado ya que ese puerto es el que estara escuchando nginx
+
+```
+
 ```
 
 este comando levantara todo lo que la app necesita

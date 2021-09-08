@@ -1,14 +1,17 @@
 {
   "name": "smartsoft",
   "version": "1.0.0",
-  "description": "proyecto backend preba",
+  "description": "proyecto backend prueba",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose",
     "start": "node ./dist/app.js",
     "dev": "nodemon -L ./dist/app.js",
     "build": "tsc",
-    "docker":"docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d"
+    "docker-build-image": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml build",
+    "docker-run-build":"docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build",
+    "docker-down":"docker-compose -f docker-compose.yml -f docker-compose.prod.yml down",
+    "docker-dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build",
+    "docker-dev-down": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml down"
   },
   "author": "mabravo153",
   "license": "ISC",
