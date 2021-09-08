@@ -16,7 +16,6 @@ const jwt_1 = require("../utils/jwt");
 const CustomError_1 = __importDefault(require("../errors/CustomError"));
 const authenticateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let { authorization } = req.headers;
-    console.log(authorization);
     if (authorization) {
         try {
             const validate = jwt_1.validateToken(authorization);

@@ -19,6 +19,7 @@ const ProductRoute_1 = __importDefault(require("../routes/ProductRoute"));
 const AuthRoute_1 = __importDefault(require("../routes/AuthRoute"));
 const error_handler_1 = __importDefault(require("../middlewares/error-handler"));
 const PurchaseRoute_1 = __importDefault(require("../routes/PurchaseRoute"));
+const route_1 = __importDefault(require("../middlewares/route"));
 class Server {
     constructor() {
         this.routesAPI = {
@@ -27,7 +28,7 @@ class Server {
             orders: "/api/v1/orders",
         };
         this.app = express_1.default();
-        this.port = process.env.PORT || "9000";
+        this.port = process.env.PORT || "6000";
         this.middlewares();
         this.routes();
         this.errors();
@@ -48,6 +49,7 @@ class Server {
         this.app.use(this.routesAPI.orders, new PurchaseRoute_1.default().getRoutes());
     }
     errors() {
+        this.app.use(route_1.default);
         this.app.use(error_handler_1.default);
     }
     dbConnection() {

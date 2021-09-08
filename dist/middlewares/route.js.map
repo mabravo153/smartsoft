@@ -1,0 +1,1 @@
+{"version":3,"file":"route.js","sourceRoot":"","sources":["../../middlewares/route.ts"],"names":[],"mappings":";;AACA,MAAM,QAAQ,GAAG,CAAC,GAAY,EAAE,GAAa,EAAE,EAAE;IAC/C,OAAO,GAAG,CAAC,MAAM,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC;QAC1B,GAAG,EAAE,sBAAsB;KAC5B,CAAC,CAAC;AACL,CAAC,CAAC;AAEF,kBAAe,QAAQ,CAAC"}

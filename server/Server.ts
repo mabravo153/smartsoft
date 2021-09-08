@@ -5,6 +5,7 @@ import ProductRoute from "../routes/ProductRoute";
 import AuthRoute from "../routes/AuthRoute";
 import errorHandlerMiddleware from "../middlewares/error-handler";
 import PurchaseRoute from "../routes/PurchaseRoute";
+import notFound from "../middlewares/route";
 
 class Server {
   private app: express.Application;
@@ -42,6 +43,7 @@ class Server {
   }
 
   errors(): void {
+    this.app.use(notFound);
     this.app.use(errorHandlerMiddleware);
   }
 
